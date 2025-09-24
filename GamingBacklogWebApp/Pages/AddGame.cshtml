@@ -1,0 +1,198 @@
+@page
+@model GamingBacklogWebApp.Pages.AddGameModel
+@using GamingBacklogWebApp.Models
+@{
+    ViewData["Title"] = "Add Game";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1>Add New Game</h1>
+                <a asp-page="./Games" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left"></i> Back to Games
+                </a>
+            </div>
+
+            <!-- External Game Search -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-search"></i> Search Game Database
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-page-handler="Search">
+                        <div class="input-group mb-3">
+                            <input asp-for="SearchQuery" class="form-control" placeholder="Search for games..." />
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </div>
+                    </form>
+
+                    @if (Model.SearchResults.Any())
+                    {
+                        <h6>Search Results:</h6>
+                        <div class="row">
+                            @foreach (var result in Model.SearchResults)
+                            {
+                                <div class="col-md-6 mb-3">
+                                    <div class="card search-result-card">
+                                        <div class="row g-0">
+                                            @if (!string.IsNullOrEmpty(result.ImageUrl))
+                                            {
+                                                <div class="col-4">
+                                                    <img src="@result.ImageUrl" class="img-fluid rounded-start h-100" style="object-fit: cover;" alt="@result.Title" />
+                                                </div>
+                                            }
+                                            <div class="@(string.IsNullOrEmpty(result.ImageUrl) ? "col-12" : "col-8")">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">@result.Title</h6>
+                                                    @if (!string.IsNullOrEmpty(result.Genre))
+                                                    {
+                                                        <p class="card-text"><small class="text-muted">@result.Genre</small></p>
+                                                    }
+                                                    @if (result.ReleaseDate.HasValue)
+                                                    {
+                                                        <p class="card-text"><small class="text-muted">Released: @result.ReleaseDate.Value.Year</small></p>
+                                                    }
+                                                    <form method="post" asp-page-handler="SelectGame">
+                                                        <input type="hidden" name="SelectedGameId" value="@result.Id" />
+                                                        <button type="submit" class="btn btn-sm btn-success">Use This Game</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                    else if (!string.IsNullOrEmpty(Model.SearchQuery))
+                    {
+                        <div class="alert alert-info">
+                            No games found for "@Model.SearchQuery". You can still add it manually below.
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <!-- Manual Game Entry Form -->
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-plus"></i> Game Details
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="mb-3">
+                                    <label asp-for="Game.Title" class="form-label"></label>
+                                    <input asp-for="Game.Title" class="form-control" required />
+                                    <span asp-validation-for="Game.Title" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label asp-for="Game.Platform" class="form-label"></label>
+                                    <input asp-for="Game.Platform" class="form-control" list="platformList" />
+                                    <datalist id="platformList">
+                                        <option value="PC"></option>
+                                        <option value="PlayStation 5"></option>
+                                        <option value="PlayStation 4"></option>
+                                        <option value="Xbox Series X/S"></option>
+                                        <option value="Xbox One"></option>
+                                        <option value="Nintendo Switch"></option>
+                                        <option value="Nintendo 3DS"></option>
+                                        <option value="Steam Deck"></option>
+                                        <option value="Mobile"></option>
+                                    </datalist>
+                                    <span asp-validation-for="Game.Platform" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="Game.Status" class="form-label"></label>
+                                    <select asp-for="Game.Status" class="form-select" asp-items="Html.GetEnumSelectList<GameStatus>()"></select>
+                                    <span asp-validation-for="Game.Status" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="Game.Rating" class="form-label">Rating (1-10)</label>
+                                    <input asp-for="Game.Rating" class="form-control" type="number" min="1" max="10" />
+                                    <span asp-validation-for="Game.Rating" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Game.Genre" class="form-label"></label>
+                            <input asp-for="Game.Genre" class="form-control" list="genreList" />
+                            <datalist id="genreList">
+                                <option value="Action"></option>
+                                <option value="Adventure"></option>
+                                <option value="RPG"></option>
+                                <option value="Strategy"></option>
+                                <option value="Simulation"></option>
+                                <option value="Sports"></option>
+                                <option value="Racing"></option>
+                                <option value="Fighting"></option>
+                                <option value="Puzzle"></option>
+                                <option value="Platformer"></option>
+                                <option value="Shooter"></option>
+                                <option value="Horror"></option>
+                                <option value="Indie"></option>
+                            </datalist>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Game.Description" class="form-label"></label>
+                            <textarea asp-for="Game.Description" class="form-control" rows="3"></textarea>
+                            <span asp-validation-for="Game.Description" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Game.ImageUrl" class="form-label">Cover Image URL</label>
+                            <input asp-for="Game.ImageUrl" class="form-control" type="url" />
+                            <span asp-validation-for="Game.ImageUrl" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Game.Notes" class="form-label"></label>
+                            <textarea asp-for="Game.Notes" class="form-control" rows="2"></textarea>
+                            <span asp-validation-for="Game.Notes" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a asp-page="./Games" class="btn btn-secondary me-md-2">Cancel</a>
+                            <button type="submit" class="btn btn-primary">Add Game</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .search-result-card {
+        height: 100%;
+        cursor: pointer;
+        transition: transform 0.2s ease-in-out;
+    }
+    
+    .search-result-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+</style>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

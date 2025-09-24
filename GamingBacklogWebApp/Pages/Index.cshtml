@@ -1,0 +1,241 @@
+﻿@page
+@model IndexModel
+@using GamingBacklogWebApp.Models
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="hero-section text-center py-5 mb-5">
+    <div class="container">
+        <h1 class="display-4 mb-4">
+            <i class="fas fa-gamepad text-primary"></i>
+            Gaming Backlog Manager
+        </h1>
+        <p class="lead mb-4">
+            Keep track of your gaming wishlist, current progress, and completed adventures all in one place.
+        </p>
+        <div class="row justify-content-center">
+            <div class="col-auto">
+                <a asp-page="./Games" class="btn btn-primary btn-lg me-3">
+                    <i class="fas fa-list"></i> View My Games
+                </a>
+                <a asp-page="./AddGame" class="btn btn-outline-primary btn-lg">
+                    <i class="fas fa-plus"></i> Add Game
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4 mb-4">
+            <div class="card h-100 text-center">
+                <div class="card-body">
+                    <i class="fas fa-heart fa-3x text-danger mb-3"></i>
+                    <h4 class="card-title">Wishlist</h4>
+                    <p class="card-text">Keep track of games you want to play. Never forget about that indie gem you discovered!</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div class="card h-100 text-center">
+                <div class="card-body">
+                    <i class="fas fa-play fa-3x text-success mb-3"></i>
+                    <h4 class="card-title">Currently Playing</h4>
+                    <p class="card-text">Track your active gaming sessions and never lose your place in your adventures.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div class="card h-100 text-center">
+                <div class="card-body">
+                    <i class="fas fa-trophy fa-3x text-warning mb-3"></i>
+                    <h4 class="card-title">Completed</h4>
+                    <p class="card-text">Celebrate your achievements and rate your completed games for future reference.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (Model.TotalGames > 0)
+    {
+        <div class="row mt-5 mb-5">
+            <div class="col-12">
+                <h3 class="text-center mb-4"><i class="fas fa-chart-bar text-primary"></i> Your Gaming Stats</h3>
+                <div class="row text-center">
+                    <div class="col-6 col-md-3">
+                        <div class="card bg-primary text-white">
+                            <div class="card-body">
+                                <h2 class="card-title">@Model.TotalGames</h2>
+                                <p class="card-text">Total Games</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="card bg-info text-white">
+                            <div class="card-body">
+                                <h2 class="card-title">@Model.WishlistCount</h2>
+                                <p class="card-text">Wishlist</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="card bg-success text-white">
+                            <div class="card-body">
+                                <h2 class="card-title">@Model.PlayingCount</h2>
+                                <p class="card-text">Playing</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="card bg-warning text-white">
+                            <div class="card-body">
+                                <h2 class="card-title">@Model.CompletedCount</h2>
+                                <p class="card-text">Completed</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @if (Model.RecentlyAdded.Any() || Model.RecentlyCompleted.Any())
+        {
+            <div class="row mb-5">
+                @if (Model.RecentlyAdded.Any())
+                {
+                    <div class="col-md-6">
+                        <h4><i class="fas fa-clock text-primary"></i> Recently Added</h4>
+                        @foreach (var game in Model.RecentlyAdded)
+                        {
+                            <div class="card mb-2">
+                                <div class="card-body py-2">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <strong>@game.Title</strong>
+                                            <small class="text-muted d-block">@game.Platform</small>
+                                        </div>
+                                        <span class="badge @GetStatusBadgeClass(game.Status)">@game.Status</span>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                @if (Model.RecentlyCompleted.Any())
+                {
+                    <div class="col-md-6">
+                        <h4><i class="fas fa-trophy text-warning"></i> Recently Completed</h4>
+                        @foreach (var game in Model.RecentlyCompleted)
+                        {
+                            <div class="card mb-2">
+                                <div class="card-body py-2">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <strong>@game.Title</strong>
+                                            <small class="text-muted d-block">@game.Platform</small>
+                                        </div>
+                                        @if (game.Rating.HasValue)
+                                        {
+                                            <div>
+                                                @for (int i = 1; i <= 5; i++)
+                                                {
+                                                    <i class="fas fa-star @(i <= (game.Rating / 2) ? "text-warning" : "text-muted")" style="font-size: 0.8em;"></i>
+                                                }
+                                                <small class="ms-1">@game.Rating/10</small>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        }
+    }
+
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <h3><i class="fas fa-search text-primary"></i> Features</h3>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item border-0 px-0">
+                    <i class="fas fa-check text-success me-2"></i>
+                    Add games manually or search from game database
+                </li>
+                <li class="list-group-item border-0 px-0">
+                    <i class="fas fa-check text-success me-2"></i>
+                    Track status: Wishlist, Playing, Completed, On Hold, Dropped
+                </li>
+                <li class="list-group-item border-0 px-0">
+                    <i class="fas fa-check text-success me-2"></i>
+                    Rate completed games (1-10 scale)
+                </li>
+                <li class="list-group-item border-0 px-0">
+                    <i class="fas fa-check text-success me-2"></i>
+                    Filter and sort by multiple criteria
+                </li>
+                <li class="list-group-item border-0 px-0">
+                    <i class="fas fa-check text-success me-2"></i>
+                    Support for multiple gaming platforms
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <h3><i class="fas fa-gamepad text-primary"></i> Get Started</h3>
+            <p class="mb-3">Ready to organize your gaming life? Here's how to get started:</p>
+            <ol class="list-group list-group-numbered">
+                <li class="list-group-item border-0 px-0">
+                    Click "Add Game" to start building your backlog
+                </li>
+                <li class="list-group-item border-0 px-0">
+                    Search for games or add them manually
+                </li>
+                <li class="list-group-item border-0 px-0">
+                    Set the status and platform for organization
+                </li>
+                <li class="list-group-item border-0 px-0">
+                    Rate games as you complete them
+                </li>
+                <li class="list-group-item border-0 px-0">
+                    Use filters to find exactly what you're looking for
+                </li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+<style>
+    .hero-section {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-radius: 15px;
+        margin: -15px -15px 0 -15px;
+    }
+    
+    .hero-section .btn-outline-primary {
+        border-color: white;
+        color: white;
+    }
+    
+    .hero-section .btn-outline-primary:hover {
+        background-color: white;
+        color: #667eea;
+    }
+</style>
+
+@functions {
+    private string GetStatusBadgeClass(GameStatus status)
+    {
+        return status switch
+        {
+            GameStatus.Wishlist => "bg-info",
+            GameStatus.Playing => "bg-success",
+            GameStatus.Completed => "bg-primary",
+            GameStatus.OnHold => "bg-warning",
+            GameStatus.Dropped => "bg-danger",
+            _ => "bg-secondary"
+        };
+    }
+}

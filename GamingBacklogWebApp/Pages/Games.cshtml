@@ -1,0 +1,200 @@
+@page
+@model GamingBacklogWebApp.Pages.GamesModel
+@using GamingBacklogWebApp.Models
+@{
+    ViewData["Title"] = "Gaming Backlog";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="display-4">Gaming Backlog</h1>
+                <a asp-page="./AddGame" class="btn btn-primary btn-lg">
+                    <i class="fas fa-plus"></i> Add Game
+                </a>
+            </div>
+
+            <!-- Filters -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <form method="get" class="row g-3">
+                        <div class="col-md-3">
+                            <label for="SearchTerm" class="form-label">Search</label>
+                            <input asp-for="SearchTerm" class="form-control" placeholder="Search games..." />
+                        </div>
+                        <div class="col-md-2">
+                            <label for="StatusFilter" class="form-label">Status</label>
+                            <select asp-for="StatusFilter" class="form-select">
+                                <option value="">All Statuses</option>
+                                <option value="Wishlist">Wishlist</option>
+                                <option value="Playing">Playing</option>
+                                <option value="Completed">Completed</option>
+                                <option value="OnHold">On Hold</option>
+                                <option value="Dropped">Dropped</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="PlatformFilter" class="form-label">Platform</label>
+                            <select asp-for="PlatformFilter" class="form-select">
+                                <option value="">All Platforms</option>
+                                @foreach (var platform in Model.Platforms)
+                                {
+                                    <option value="@platform">@platform</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="SortBy" class="form-label">Sort By</label>
+                            <select asp-for="SortBy" class="form-select">
+                                <option value="DateAdded">Date Added</option>
+                                <option value="Title">Title</option>
+                                <option value="Platform">Platform</option>
+                                <option value="Status">Status</option>
+                                <option value="Rating">Rating</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="SortOrder" class="form-label">Order</label>
+                            <select asp-for="SortOrder" class="form-select">
+                                <option value="desc">Descending</option>
+                                <option value="asc">Ascending</option>
+                            </select>
+                        </div>
+                        <div class="col-md-1 d-flex align-items-end">
+                            <button type="submit" class="btn btn-outline-primary w-100">Filter</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Games Grid -->
+            @if (Model.Games.Any())
+            {
+                <div class="row">
+                    @foreach (var game in Model.Games)
+                    {
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <div class="card h-100 game-card">
+                                @if (!string.IsNullOrEmpty(game.ImageUrl))
+                                {
+                                    <img src="@game.ImageUrl" class="card-img-top game-image" alt="@game.Title" />
+                                }
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="card-title">@game.Title</h5>
+                                    <div class="mb-2">
+                                        <span class="badge bg-secondary">@game.Platform</span>
+                                        <span class="badge @GetStatusBadgeClass(game.Status)">@game.Status</span>
+                                    </div>
+                                    
+                                    @if (game.Rating.HasValue)
+                                    {
+                                        <div class="mb-2">
+                                            <strong>Rating:</strong>
+                                            @for (int i = 1; i <= 10; i++)
+                                            {
+                                                <i class="fas fa-star @(i <= game.Rating ? "text-warning" : "text-muted")"></i>
+                                            }
+                                            <span class="ms-1">(@game.Rating/10)</span>
+                                        </div>
+                                    }
+
+                                    @if (!string.IsNullOrEmpty(game.Description))
+                                    {
+                                        <p class="card-text flex-grow-1">
+                                            @(game.Description.Length > 100 ? game.Description.Substring(0, 100) + "..." : game.Description)
+                                        </p>
+                                    }
+
+                                    <div class="mt-auto">
+                                        <small class="text-muted d-block mb-2">
+                                            Added: @game.DateAdded.ToString("MMM dd, yyyy")
+                                            @if (game.DateCompleted.HasValue)
+                                            {
+                                                <br />@: Completed: @game.DateCompleted.Value.ToString("MMM dd, yyyy")
+                                            }
+                                        </small>
+                                        <div class="btn-group d-flex" role="group">
+                                            <a asp-page="./EditGame" asp-route-id="@game.Id" class="btn btn-outline-primary btn-sm">Edit</a>
+                                            <button type="button" class="btn btn-outline-danger btn-sm" onclick="confirmDelete(@game.Id, '@game.Title')">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="text-center py-5">
+                    <i class="fas fa-gamepad fa-5x text-muted mb-3"></i>
+                    <h3 class="text-muted">No games found</h3>
+                    <p class="text-muted">Start building your gaming backlog by adding some games!</p>
+                    <a asp-page="./AddGame" class="btn btn-primary">Add Your First Game</a>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm Delete</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete <strong id="gameTitle"></strong>?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <form method="post" style="display: inline;">
+                    <input type="hidden" name="id" id="gameIdToDelete" />
+                    <button type="submit" asp-page-handler="Delete" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@functions {
+    private string GetStatusBadgeClass(GameStatus status)
+    {
+        return status switch
+        {
+            GameStatus.Wishlist => "bg-info",
+            GameStatus.Playing => "bg-success",
+            GameStatus.Completed => "bg-primary",
+            GameStatus.OnHold => "bg-warning",
+            GameStatus.Dropped => "bg-danger",
+            _ => "bg-secondary"
+        };
+    }
+}
+
+<style>
+    .game-card {
+        transition: transform 0.2s ease-in-out;
+    }
+    
+    .game-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    
+    .game-image {
+        height: 200px;
+        object-fit: cover;
+    }
+</style>
+
+<script>
+    function confirmDelete(gameId, gameTitle) {
+        document.getElementById('gameTitle').textContent = gameTitle;
+        document.getElementById('gameIdToDelete').value = gameId;
+        new bootstrap.Modal(document.getElementById('deleteModal')).show();
+    }
+</script>

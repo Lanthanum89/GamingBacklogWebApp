@@ -1,0 +1,135 @@
+@page
+@model GamingBacklogWebApp.Pages.EditGameModel
+@using GamingBacklogWebApp.Models
+@{
+    ViewData["Title"] = "Edit Game";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1>Edit Game</h1>
+                <a asp-page="./Games" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left"></i> Back to Games
+                </a>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-edit"></i> Game Details
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        <input type="hidden" asp-for="Game.Id" />
+                        <input type="hidden" asp-for="Game.DateAdded" />
+                        <input type="hidden" asp-for="Game.ExternalId" />
+
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="mb-3">
+                                    <label asp-for="Game.Title" class="form-label"></label>
+                                    <input asp-for="Game.Title" class="form-control" required />
+                                    <span asp-validation-for="Game.Title" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label asp-for="Game.Platform" class="form-label"></label>
+                                    <input asp-for="Game.Platform" class="form-control" list="platformList" />
+                                    <datalist id="platformList">
+                                        <option value="PC"></option>
+                                        <option value="PlayStation 5"></option>
+                                        <option value="PlayStation 4"></option>
+                                        <option value="Xbox Series X/S"></option>
+                                        <option value="Xbox One"></option>
+                                        <option value="Nintendo Switch"></option>
+                                        <option value="Nintendo 3DS"></option>
+                                        <option value="Steam Deck"></option>
+                                        <option value="Mobile"></option>
+                                    </datalist>
+                                    <span asp-validation-for="Game.Platform" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="Game.Status" class="form-label"></label>
+                                    <select asp-for="Game.Status" class="form-select" asp-items="Html.GetEnumSelectList<GameStatus>()"></select>
+                                    <span asp-validation-for="Game.Status" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="Game.Rating" class="form-label">Rating (1-10)</label>
+                                    <input asp-for="Game.Rating" class="form-control" type="number" min="1" max="10" />
+                                    <span asp-validation-for="Game.Rating" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Game.Genre" class="form-label"></label>
+                            <input asp-for="Game.Genre" class="form-control" list="genreList" />
+                            <datalist id="genreList">
+                                <option value="Action"></option>
+                                <option value="Adventure"></option>
+                                <option value="RPG"></option>
+                                <option value="Strategy"></option>
+                                <option value="Simulation"></option>
+                                <option value="Sports"></option>
+                                <option value="Racing"></option>
+                                <option value="Fighting"></option>
+                                <option value="Puzzle"></option>
+                                <option value="Platformer"></option>
+                                <option value="Shooter"></option>
+                                <option value="Horror"></option>
+                                <option value="Indie"></option>
+                            </datalist>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Game.Description" class="form-label"></label>
+                            <textarea asp-for="Game.Description" class="form-control" rows="3"></textarea>
+                            <span asp-validation-for="Game.Description" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Game.ImageUrl" class="form-label">Cover Image URL</label>
+                            <input asp-for="Game.ImageUrl" class="form-control" type="url" />
+                            <span asp-validation-for="Game.ImageUrl" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Game.Notes" class="form-label"></label>
+                            <textarea asp-for="Game.Notes" class="form-control" rows="2"></textarea>
+                            <span asp-validation-for="Game.Notes" class="text-danger"></span>
+                        </div>
+
+                        @if (Model.Game.DateCompleted.HasValue)
+                        {
+                            <div class="mb-3">
+                                <label asp-for="Game.DateCompleted" class="form-label">Date Completed</label>
+                                <input asp-for="Game.DateCompleted" class="form-control" type="date" />
+                                <span asp-validation-for="Game.DateCompleted" class="text-danger"></span>
+                            </div>
+                        }
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a asp-page="./Games" class="btn btn-secondary me-md-2">Cancel</a>
+                            <button type="submit" class="btn btn-primary">Update Game</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
