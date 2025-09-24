@@ -1,11 +1,12 @@
 # 🎮 Gaming Backlog Web App
 
-A modern web application built with ASP.NET Core 9.0 to help gamers manage their gaming backlog, track progress, and discover new games to play.
+A beautifully designed, modern web application built with ASP.NET Core 9.0 to help gamers manage their gaming backlog, track progress, and discover new games to play. Features a professional pink and lilac cozy gaming aesthetic with clean, mature typography.
 
 ![Gaming Backlog App](https://img.shields.io/badge/ASP.NET%20Core-9.0-blue?style=flat-square&logo=.net)
 ![Entity Framework](https://img.shields.io/badge/Entity%20Framework-Core-orange?style=flat-square)
 ![Bootstrap](https://img.shields.io/badge/Bootstrap-5.0-purple?style=flat-square&logo=bootstrap)
 ![C#](https://img.shields.io/badge/C%23-12.0-green?style=flat-square&logo=csharp)
+![Google Fonts](https://img.shields.io/badge/Fonts-Poppins%20%7C%20Inter-ff69b4?style=flat-square)
 
 ## ✨ Features
 
@@ -32,6 +33,14 @@ A modern web application built with ASP.NET Core 9.0 to help gamers manage their
 - **Statistics Overview**: View total games, wishlist count, currently playing, and completed
 - **Recent Activity**: See recently added and completed games
 - **Visual Progress**: Progress tracking with status badges and completion stats
+
+### 🎨 Design & User Experience
+- **Professional Aesthetic**: Modern pink and lilac cosy gaming theme
+- **Clean Typography**: Professional Poppins and Inter fonts for excellent readability
+- **Responsive Design**: Fully responsive layout that works on all devices
+- **Glassmorphism Effects**: Beautiful backdrop blur and transparency effects
+- **Smooth Animations**: Hover effects and transitions for enhanced user experience
+- **Accessibility**: High contrast text and readable font choices
 
 ## 🚀 Getting Started
 
@@ -62,13 +71,29 @@ A modern web application built with ASP.NET Core 9.0 to help gamers manage their
    dotnet build
    ```
 
-5. **Run the application**
+5. **Run the application with hot reload** (recommended for development)
+   ```bash
+   dotnet watch run
+   ```
+   
+   Or run normally:
    ```bash
    dotnet run
    ```
 
 6. **Open your browser**
    Navigate to `http://localhost:5097` to start using the app!
+
+### 🔥 Hot Reload Development
+
+When using `dotnet watch run`, the application supports hot reload for rapid development:
+
+- **CSS changes**: Automatically applied without restart
+- **Razor page changes**: Instantly reflected in the browser
+- **C# code changes**: Application restarts automatically
+- **Manual refresh**: Press `Ctrl+R` in the terminal to force restart
+
+Simply save your files and refresh the browser to see changes!
 
 ## 🎮 How to Use
 
@@ -117,7 +142,10 @@ GamingBacklogWebApp/
 - **Backend**: ASP.NET Core 9.0 with Razor Pages
 - **Database**: Entity Framework Core with In-Memory Database
 - **Frontend**: Bootstrap 5, HTML5, CSS3, JavaScript
+- **Typography**: Google Fonts (Poppins, Inter) for professional readability
 - **Icons**: Font Awesome 6.0
+- **Styling**: Custom CSS with glassmorphism effects and smooth animations
+- **Hot Reload**: Enabled for rapid development and testing
 - **Development**: C# 12.0, .NET 9.0
 
 ## 📦 Dependencies
@@ -213,8 +241,16 @@ ENTRYPOINT ["dotnet", "GamingBacklogWebApp.dll"]
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📋 Future Enhancements
+## 📋 Recent Updates & Future Enhancements
 
+### ✅ Recently Completed
+- [x] **Professional Design System** - Modern pink/lilac cozy gaming aesthetic
+- [x] **Clean Typography** - Poppins and Inter fonts for excellent readability
+- [x] **Hot Reload Development** - Rapid development with automatic refresh
+- [x] **Responsive Layout** - Mobile-friendly design with glassmorphism effects
+- [x] **Enhanced UX** - Smooth animations and hover effects
+
+### 🚀 Future Enhancements
 - [ ] **Real IGDB API Integration** - Connect to actual game database
 - [ ] **User Authentication** - Multi-user support with individual backlogs
 - [ ] **Achievement Tracking** - Track game achievements and trophies
@@ -225,6 +261,7 @@ ENTRYPOINT ["dotnet", "GamingBacklogWebApp.dll"]
 - [ ] **Export/Import** - Backup and restore game collections
 - [ ] **Advanced Analytics** - Detailed gaming statistics and trends
 - [ ] **Game Recommendations** - AI-powered game suggestions
+- [ ] **Dark Mode Toggle** - Optional dark theme for different preferences
 
 ## 📝 License
 
@@ -232,7 +269,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👨‍💻 Author
 
-Built with ❤️ for gamers who love organizing their gaming adventures!
+Built with ❤️ by Laura Norwood @codermum for gamers who love organising their gaming adventures!
 
 ---
 

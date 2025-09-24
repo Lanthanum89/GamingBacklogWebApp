@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GamingBacklogWebApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+815c46d6f9a7f4051062104dc43d614c04ba3b79")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4369341fbb5c75e856baabf2ff62c6a0bf7c8e64")]
 [assembly: System.Reflection.AssemblyProductAttribute("GamingBacklogWebApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GamingBacklogWebApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
