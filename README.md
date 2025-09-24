@@ -277,7 +277,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👨‍💻 Author
 
-Built with ❤️ by Laura Norwood @codermum for gamers who love organising their gaming adventures!
+Built with ❤️ by Laura Norwood @codermumuk for gamers who love organising their gaming adventures!
 
 ---
 
