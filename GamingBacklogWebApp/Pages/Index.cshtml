@@ -32,7 +32,7 @@
         <div class="col-lg-4 mb-4">
             <div class="card h-100 text-center">
                 <div class="card-body">
-                    <i class="fas fa-heart fa-3x text-danger mb-3"></i>
+                    <i class="fas fa-heart feature-icon" style="color: #F8BBD9;"></i>
                     <h4 class="card-title">Wishlist</h4>
                     <p class="card-text">Keep track of games you want to play. Never forget about that indie gem you discovered!</p>
                 </div>
@@ -41,7 +41,7 @@
         <div class="col-lg-4 mb-4">
             <div class="card h-100 text-center">
                 <div class="card-body">
-                    <i class="fas fa-play fa-3x text-success mb-3"></i>
+                    <i class="fas fa-play feature-icon" style="color: #A7F3D0;"></i>
                     <h4 class="card-title">Currently Playing</h4>
                     <p class="card-text">Track your active gaming sessions and never lose your place in your adventures.</p>
                 </div>
@@ -50,7 +50,7 @@
         <div class="col-lg-4 mb-4">
             <div class="card h-100 text-center">
                 <div class="card-body">
-                    <i class="fas fa-trophy fa-3x text-warning mb-3"></i>
+                    <i class="fas fa-trophy feature-icon" style="color: #FDBA74;"></i>
                     <h4 class="card-title">Completed</h4>
                     <p class="card-text">Celebrate your achievements and rate your completed games for future reference.</p>
                 </div>
@@ -64,32 +64,32 @@
             <div class="col-12">
                 <h3 class="text-center mb-4"><i class="fas fa-chart-bar text-primary"></i> Your Gaming Stats</h3>
                 <div class="row text-center">
-                    <div class="col-6 col-md-3">
-                        <div class="card bg-primary text-white">
+                    <div class="col-6 col-md-3 mb-3">
+                        <div class="card bg-primary text-white stats-card">
                             <div class="card-body">
                                 <h2 class="card-title">@Model.TotalGames</h2>
                                 <p class="card-text">Total Games</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-6 col-md-3">
-                        <div class="card bg-info text-white">
+                    <div class="col-6 col-md-3 mb-3">
+                        <div class="card bg-info text-dark stats-card">
                             <div class="card-body">
                                 <h2 class="card-title">@Model.WishlistCount</h2>
                                 <p class="card-text">Wishlist</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-6 col-md-3">
-                        <div class="card bg-success text-white">
+                    <div class="col-6 col-md-3 mb-3">
+                        <div class="card bg-success text-dark stats-card">
                             <div class="card-body">
                                 <h2 class="card-title">@Model.PlayingCount</h2>
                                 <p class="card-text">Playing</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-6 col-md-3">
-                        <div class="card bg-warning text-white">
+                    <div class="col-6 col-md-3 mb-3">
+                        <div class="card bg-warning text-dark stats-card">
                             <div class="card-body">
                                 <h2 class="card-title">@Model.CompletedCount</h2>
                                 <p class="card-text">Completed</p>
@@ -221,7 +221,24 @@
     
     .hero-section .btn-outline-primary:hover {
         background-color: white;
-        color: #667eea;
+        color: var(--text-primary);
+    }
+    
+    /* Additional cozy touches */
+    .feature-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.1));
+    }
+    
+    .stats-card {
+        border-radius: 20px;
+        transition: all 0.3s ease;
+    }
+    
+    .stats-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 40px rgba(228, 193, 249, 0.4);
     }
 </style>
 
