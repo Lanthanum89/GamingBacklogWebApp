@@ -10,6 +10,8 @@ A beautifully designed, modern web application built with ASP.NET Core 9.0 to he
 
 ## ✨ Features
 
+<img width="1366" height="843" alt="Screenshot 2025-09-24 161032" src="https://github.com/user-attachments/assets/3387a15f-1452-4b42-ab73-75c84f3dea94" />
+
 ### 🎯 Core Functionality
 - **Game Management**: Add, edit, and delete games from your backlog
 - **Status Tracking**: Track games as Wishlist, Playing, Completed, On Hold, or Dropped
@@ -29,10 +31,16 @@ A beautifully designed, modern web application built with ASP.NET Core 9.0 to he
 - **Rich Metadata**: Cover images, descriptions, genres, and release dates
 - **Visual Search**: Image-rich search results for easy game identification
 
+<img width="1282" height="356" alt="Screenshot 2025-09-24 161057" src="https://github.com/user-attachments/assets/1e37d265-69f3-423d-a9fb-49510c135203" />
+
+
 ### 📊 Dashboard & Analytics
 - **Statistics Overview**: View total games, wishlist count, currently playing, and completed
 - **Recent Activity**: See recently added and completed games
 - **Visual Progress**: Progress tracking with status badges and completion stats
+
+<img width="1345" height="904" alt="Screenshot 2025-09-24 161048" src="https://github.com/user-attachments/assets/b115f408-dc44-4f5b-8a99-000cdc3e5503" />
+
 
 ### 🎨 Design & User Experience
 - **Professional Aesthetic**: Modern pink and lilac cosy gaming theme
