@@ -145,7 +145,6 @@ G:\My Drive\Coding\Git Clones\GamingBacklogWebApp\GamingBacklogWebApp\obj\Debug\
 G:\My Drive\Coding\Git Clones\GamingBacklogWebApp\GamingBacklogWebApp\obj\Debug\net9.0\scopedcss\bundle\GamingBacklogWebApp.styles.css
 G:\My Drive\Coding\Git Clones\GamingBacklogWebApp\GamingBacklogWebApp\obj\Debug\net9.0\scopedcss\projectbundle\GamingBacklogWebApp.bundle.scp.css
 G:\My Drive\Coding\Git Clones\GamingBacklogWebApp\GamingBacklogWebApp\obj\Debug\net9.0\compressed\tz4zeacsbt-61n19gt1b8.gz
-G:\My Drive\Coding\Git Clones\GamingBacklogWebApp\GamingBacklogWebApp\obj\Debug\net9.0\compressed\y9cjfou90n-xtxxf3hu2r.gz
 G:\My Drive\Coding\Git Clones\GamingBacklogWebApp\GamingBacklogWebApp\obj\Debug\net9.0\compressed\qokx586n15-bqjiyaj88i.gz
 G:\My Drive\Coding\Git Clones\GamingBacklogWebApp\GamingBacklogWebApp\obj\Debug\net9.0\compressed\y0dfswo66w-c2jlpeoesf.gz
 G:\My Drive\Coding\Git Clones\GamingBacklogWebApp\GamingBacklogWebApp\obj\Debug\net9.0\compressed\vfqwlbekk3-erw9l3u2r3.gz
@@ -218,4 +217,5 @@ G:\My Drive\Coding\Git Clones\GamingBacklogWebApp\GamingBacklogWebApp\obj\Debug\
 G:\My Drive\Coding\Git Clones\GamingBacklogWebApp\GamingBacklogWebApp\obj\Debug\net9.0\GamingBacklogWebApp.sourcelink.json
 G:\My Drive\Coding\Git Clones\GamingBacklogWebApp\GamingBacklogWebApp\obj\Debug\net9.0\compressed\25ptyc8zc7-ah5ggzvdvr.gz
 G:\My Drive\Coding\Git Clones\GamingBacklogWebApp\GamingBacklogWebApp\obj\Debug\net9.0\compressed\noymrk3n74-ah5ggzvdvr.gz
-G:\My Drive\Coding\Git Clones\GamingBacklogWebApp\GamingBacklogWebApp\obj\Debug\net9.0\compressed\ptzo2dwmcx-o0z0is1q1h.gz
+G:\My Drive\Coding\Git Clones\GamingBacklogWebApp\GamingBacklogWebApp\obj\Debug\net9.0\compressed\ptzo2dwmcx-hklu9a2wj0.gz
+G:\My Drive\Coding\Git Clones\GamingBacklogWebApp\GamingBacklogWebApp\obj\Debug\net9.0\compressed\y9cjfou90n-dh95suzysg.gz
