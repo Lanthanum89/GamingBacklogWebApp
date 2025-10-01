@@ -1,6 +1,6 @@
 # 🎮 Gaming Backlog Web App
 
-A beautifully designed, modern web application built with ASP.NET Core 9.0 to help gamers manage their gaming backlog, track progress, and discover new games to play. Features a professional pink and lilac cozy gaming aesthetic with clean, mature typography.
+A modern, full-stack web app built with ASP.NET Core 9.0 that helps gamers track, manage, and visualise their personal gaming backlog.
 
 ![Gaming Backlog App](https://img.shields.io/badge/ASP.NET%20Core-9.0-blue?style=flat-square&logo=.net)
 ![Entity Framework](https://img.shields.io/badge/Entity%20Framework-Core-orange?style=flat-square)
